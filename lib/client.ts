@@ -30,7 +30,7 @@ export default class Client {
     this.http = new HTTPClient({
       defaultHeaders: {
         Authorization: "Bearer " + this.config.channelAccessToken,
-        ...config.httpConfig.headers,
+        ...config.httpConfig?.headers,
       },
       responseParser: this.parseHTTPResponse.bind(this),
       ...config.httpConfig,
