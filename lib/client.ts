@@ -723,6 +723,22 @@ export default class Client {
     );
     return ensureJSON(res);
   }
+
+  public async markAsRead(userId: string): Promise<{}> {
+    const body = {
+      chat: {
+        userId
+      }
+    }
+    const res = await this.http.post<{
+      chat: {
+        userId: string
+      }
+    }>(`${MESSAGING_API_PREFIX}/message/markAsRead`, {
+      body
+    });
+    return ensureJSON(res);
+  }
 }
 
 export class OAuth {
