@@ -727,16 +727,14 @@ export default class Client {
   public async markAsRead(userId: string): Promise<{}> {
     const body = {
       chat: {
-        userId
-      }
-    }
+        userId,
+      },
+    };
     const res = await this.http.post<{
       chat: {
-        userId: string
-      }
-    }>(`${MESSAGING_API_PREFIX}/message/markAsRead`, {
-      body
-    });
+        userId: string;
+      };
+    }>(`${MESSAGING_API_PREFIX}/message/markAsRead`, body);
     return ensureJSON(res);
   }
 }
