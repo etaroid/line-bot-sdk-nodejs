@@ -149,6 +149,7 @@ export default class Client {
     setWebhookEndpointUrl(endpoint: string): Promise<{}>;
     getWebhookEndpointInfo(): Promise<Types.WebhookEndpointInfoResponse>;
     testWebhookEndpoint(endpoint?: string): Promise<Types.TestWebhookEndpointResponse>;
+    markAsRead(userId: string): Promise<{}>;
 }
 export declare class OAuth {
     private http;
