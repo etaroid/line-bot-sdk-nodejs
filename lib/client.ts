@@ -730,7 +730,6 @@ export default class Client {
         userId,
       },
     };
-    console.log({ body_in_lib: body });
     const res = await this.http.post<{
       chat: {
         userId: string;
