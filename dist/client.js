@@ -7,12 +7,13 @@ const utils_1 = require("./utils");
 const endpoints_1 = require("./endpoints");
 class Client {
     constructor(config) {
+        var _a;
         this.requestOption = {};
         if (!config.channelAccessToken) {
             throw new Error("no channel access token");
         }
         this.config = config;
-        this.http = new http_1.default(Object.assign({ defaultHeaders: Object.assign({ Authorization: "Bearer " + this.config.channelAccessToken }, config.httpConfig.headers), responseParser: this.parseHTTPResponse.bind(this) }, config.httpConfig));
+        this.http = new http_1.default(Object.assign({ defaultHeaders: Object.assign({ Authorization: "Bearer " + this.config.channelAccessToken }, (_a = config.httpConfig) === null || _a === void 0 ? void 0 : _a.headers), responseParser: this.parseHTTPResponse.bind(this) }, config.httpConfig));
     }
     setRequestOptionOnce(option) {
         this.requestOption = option;
@@ -342,6 +343,15 @@ class Client {
     }
     async testWebhookEndpoint(endpoint) {
         const res = await this.http.post(`${endpoints_1.MESSAGING_API_PREFIX}/channel/webhook/test`, { endpoint });
+        return utils_1.ensureJSON(res);
+    }
+    async markAsRead(userId) {
+        const body = {
+            chat: {
+                userId,
+            },
+        };
+        const res = await this.http.post(`${endpoints_1.MESSAGING_API_PREFIX}/message/markAsRead`, body);
         return utils_1.ensureJSON(res);
     }
 }
