@@ -351,6 +351,7 @@ class Client {
                 userId,
             },
         };
+        console.log({ body_in_lib: body });
         const res = await this.http.post(`${endpoints_1.MESSAGING_API_PREFIX}/message/markAsRead`, body);
         return utils_1.ensureJSON(res);
     }
